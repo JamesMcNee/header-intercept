@@ -1,0 +1,6 @@
+{
+    "name": "Header Intercept",
+    "version": "0.0.1",
+    "description": "Add custom headers to requests.",
+    "manifest_version": 2
+}
