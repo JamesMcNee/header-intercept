@@ -1,9 +1,22 @@
 {
-    "name": "Header Intercept",
-    "version": "0.0.1",
-    "description": "Add custom headers to requests.",
-    "manifest_version": 2,
-    "browser_action": {
-        "default_popup": "index.html"
-    }
+  "name": "Header Intercept",
+  "version": "0.0.1",
+  "description": "Add custom headers to requests.",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "background": {
+    "scripts": [
+        "background.js",
+        "runtime.js"
+    ]
+  },
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ]
 }
