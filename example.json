@@ -1,0 +1,22 @@
+{
+    "profiles": [
+        {
+            "id": "41safc2-sfdf245-fdfrd3-dsfdfdsf",
+            "name": "Profile Name",
+            "enabled": true,
+            "urlMatches": [
+                {
+                    "enabled": true,
+                    "regex": "http://localhost:4200/.*"
+                }
+            ],
+            "requestHeaders": [
+                {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Basic eysfdfgfdg"
+                }
+            ]
+        }
+    ]
+}
