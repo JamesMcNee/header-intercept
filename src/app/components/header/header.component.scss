@@ -1,0 +1,15 @@
+@import '~../../../scss/colours';
+@import '~../../../scss/font';
+
+.header {
+    width: 100%;
+    text-align: center;
+    background-color: $primary-blue;
+
+    &__title {
+        padding: 15px 0;
+        font-family: 'Baloo Bhai', cursive;
+        font-size: 30px;
+        font-weight: normal;
+    }
+}
