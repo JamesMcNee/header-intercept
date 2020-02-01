@@ -1,2 +1,5 @@
 <div class="footer">
+    <div class="hint" *ngIf="(hint$ | async) as hint">
+        <i [class]="hint.icon" style="margin-right: 10px;"></i><span [innerHTML]="hint.text"></span>
+    </div>
 </div>

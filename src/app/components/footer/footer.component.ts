@@ -1,4 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/core';
+import { HINTS_SERVICE } from 'src/app/configuration/injection-tokens';
+import { HintsService } from 'src/app/services/hits-service';
+import { Observable } from 'rxjs';
+import { Hint } from 'src/app/domain/hint.model';
 
 @Component({
   selector: 'app-footer',
@@ -8,9 +12,12 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  hint$: Observable<Hint>;
+
+  constructor(@Inject(HINTS_SERVICE) private hintsService: HintsService) { }
 
   ngOnInit() {
+    this.hint$ = this.hintsService.getHintStream();
   }
 
 }

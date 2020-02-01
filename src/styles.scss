@@ -21,3 +21,21 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0;
 }
+
+a {
+    text-decoration: none;
+    color: $primary-blue-lightest;
+    font-weight: bold;
+
+    &:hover {
+        text-decoration: none;
+        opacity: 0.8;
+        cursor: pointer;
+    }
+
+    &.disabled {
+        &:hover {
+            cursor: not-allowed;
+        }
+    }
+}
