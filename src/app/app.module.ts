@@ -9,6 +9,7 @@ import { LocalstorageProfileRepository } from './repository/localstorage-profile
 import { HeaderComponent } from './components/header/header.component';
 import { ViewProfilesComponent } from './components/view-profiles/view-profiles.component';
 import { IsArePipe } from './pipes/is-are.pipe';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { IsArePipe } from './pipes/is-are.pipe';
     ProfilesContainerComponent,
     HeaderComponent,
     ViewProfilesComponent,
-    IsArePipe
+    IsArePipe,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
