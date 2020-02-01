@@ -11,4 +11,43 @@ export abstract class TestProfileBuilder {
             requestHeaders: []
         }
     }
+
+    public static anExampleFullProfile(): Profile {
+        return {
+            id: 'PROFILE_ID',
+            name: 'Search engine',
+            enabled: true,
+            urlMatches: [
+                {
+                    enabled: true,
+                    regex: 'http://google.com'
+                },
+                {
+                    enabled: true,
+                    regex: 'http://bing.com'
+                },
+                {
+                    enabled: false,
+                    regex: 'http://ask.com'
+                }
+            ],
+            requestHeaders: [
+                {
+                    enabled: true,
+                    name: 'enable-super-search',
+                    value: 'true'
+                },
+                {
+                    enabled: true,
+                    name: 'allow-random-results',
+                    value: 'false'
+                },
+                {
+                    enabled: false,
+                    name: 'cause-spontanious-combustion',
+                    value: 'true'
+                }
+            ]
+        }
+    }
 }

@@ -1,0 +1,48 @@
+@import '../../../scss/colours';
+
+.profile-panel {
+    margin: 8px;
+}
+
+.profile-actions {
+    display: inline-flex;
+    list-style-type: none;
+    margin: 0;
+}
+
+.icon-container {
+    font-size: 3vh;
+    margin: 0 10px;
+
+    svg {
+        height: 100%;
+    }
+}
+
+.content-block {
+    margin-top: 20px;
+
+    &:first-of-type {
+        margin-top: 0;
+    }
+}
+
+.header-list {
+    list-style-type: none;
+    margin: 10px 0 0 10px;
+    padding: 0;
+
+    .enabled {
+        color: $positive-green;
+    }
+
+    .disabled {
+        color: $negative-red;
+    }
+}
+
+.weight {
+    &_bold {
+        font-weight: bold;
+    }
+}

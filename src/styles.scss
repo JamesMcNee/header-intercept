@@ -2,6 +2,8 @@
 
 @import 'scss/colours';
 @import 'scss/font';
+@import 'scss/components/components';
+@import 'scss/objects/objects';
 
 html, body {
     margin: 0;
@@ -9,7 +11,7 @@ html, body {
 
     color: white;
 
-    background-color: $backround-grey;
+    background-color: $background-grey;
     font-family: "Ubuntu", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 

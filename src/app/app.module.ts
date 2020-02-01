@@ -7,12 +7,16 @@ import { ProfilesContainerComponent } from './containers/profiles-container/prof
 import { PROFILE_REPOSITORY } from './configuration/injection-tokents';
 import { LocalstorageProfileRepository } from './repository/localstorage-profile-repository.service';
 import { HeaderComponent } from './components/header/header.component';
+import { ViewProfilesComponent } from './components/view-profiles/view-profiles.component';
+import { IsArePipe } from './pipes/is-are.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfilesContainerComponent,
-    HeaderComponent
+    HeaderComponent,
+    ViewProfilesComponent,
+    IsArePipe
   ],
   imports: [
     BrowserModule,
