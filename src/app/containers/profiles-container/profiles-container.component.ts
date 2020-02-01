@@ -21,4 +21,12 @@ export class ProfilesContainerComponent implements OnInit {
     this.profiles$ = this.profileRepository.getAllAsObservable();
   }
 
+  handleProfileUpdate(profile: Profile): void {
+    this.profileRepository.persist(profile);
+  }
+
+  handleDeleteProfile(id: string): void {
+    this.profileRepository.remove(id);
+  }
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { Profile } from 'src/app/domain/profile.model';
 
 @Component({
@@ -10,12 +10,23 @@ import { Profile } from 'src/app/domain/profile.model';
 export class ViewProfilesComponent implements OnInit {
 
   @Input() profiles: Profile[];
+  @Output() persistProfileEvent: EventEmitter<Profile> = new EventEmitter<Profile>();
+  @Output() deleteProfileEvent: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {
 
   }
 
   ngOnInit() {
+  }
+
+  toggleProfileEnableState(profile: Profile): void {
+    this.persistProfileEvent.emit({...profile, enabled: !profile.enabled});
+  }
+
+  deleteProfile(profile: Profile): void {
+    console.log("TEST");
+    this.deleteProfileEvent.emit(profile.id);
   }
 
   getProfileSummary(profile: Profile): { urlMatches: { total: number, active: number, inactive: number }, headers: { total: number, active: number, inactive: number }} {

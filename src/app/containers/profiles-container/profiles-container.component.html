@@ -1,2 +1,1 @@
-<app-view-profiles [profiles]="profiles$ | async"></app-view-profiles>
-<!-- <app-view-profiles [profiles]="profiles$ | async"></app-view-profiles> -->
+<app-view-profiles [profiles]="profiles$ | async" (persistProfileEvent)="handleProfileUpdate($event)" (deleteProfileEvent)="handleDeleteProfile($event)"></app-view-profiles>

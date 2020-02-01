@@ -22,7 +22,7 @@
     </div>
     <div class="o-panel__footer">
         <ul class="profile-actions">
-            <li class="icon-container">
+            <li class="icon-container" (click)="deleteProfile(profile)">
                 <i class="far fa-trash-alt"></i>
             </li>
             <li class="icon-container">
@@ -30,7 +30,7 @@
             </li>
             <li>
                 <label class="c-switch">
-                    <input type="checkbox" checked>
+                    <input type="checkbox" (change)="toggleProfileEnableState(profile)" [checked]="profile.enabled">
                     <span class="c-switch__slider"></span>
                 </label>
             </li>
