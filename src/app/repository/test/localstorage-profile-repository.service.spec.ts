@@ -4,6 +4,7 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { MockLocalstorage } from './mock-localstorage';
 import { Profile } from 'src/app/domain/profile.model';
 import { TestProfileBuilder } from './test-profile.builder';
+import { skip } from 'rxjs/operators';
 
 describe('Localstorage Profile Repository', () => {
 
@@ -103,6 +104,39 @@ describe('Localstorage Profile Repository', () => {
 
             // then
             expect(actual.length).toBe(0);
+        });
+    });
+
+    describe('getAllAsObservable()', () => {
+        it('should return all stored profiles when there are profiles stored', (done) => {
+            // given
+            const profileOne: Profile = { ...TestProfileBuilder.anExampleProfile(), id: 'PROFILE_ONE' };
+            const profileTwo: Profile = { ...TestProfileBuilder.anExampleProfile(), id: 'PROFILE_TWO' };
+            populateProfileStore(profileOne, profileTwo);
+
+            // when / then
+            repository.getAllAsObservable().subscribe(profiles => {
+                expect(profiles.length).toEqual(2);
+                expect(profiles).toContain(profileOne);
+                expect(profiles).toContain(profileTwo);
+                done();
+            });
+        });
+
+        it('should refire the observable when profile is persisted', (done) => {
+            // given
+            createEmptyProfileStore();
+
+            // then
+            repository.getAllAsObservable().pipe(skip(1)).subscribe(profiles => {
+                expect(profiles.length).toEqual(1);
+                expect(profiles).toContain(newProfile);
+                done();
+            });
+
+            // when
+            const newProfile: Profile = { ...TestProfileBuilder.anExampleProfile(), id: 'NEW_PROFILE' };
+            repository.persist(newProfile);
         });
     });
 
@@ -216,7 +250,7 @@ describe('Localstorage Profile Repository', () => {
             expect(repository.has("PROFILE_ID")).toEqual(false);
 
             // when
-            const profileToRemove: Profile = { ...TestProfileBuilder.anExampleProfile(), id: 'PROFILE_ID'};
+            const profileToRemove: Profile = { ...TestProfileBuilder.anExampleProfile(), id: 'PROFILE_ID' };
             const actual = repository.remove(profileToRemove);
 
             // then

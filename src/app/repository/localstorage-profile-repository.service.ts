@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ProfileRepository } from './profile-repository';
 import { Profile } from '../domain/profile.model';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: "root"
@@ -8,6 +9,12 @@ import { Profile } from '../domain/profile.model';
 export class LocalstorageProfileRepository implements ProfileRepository {
 
     private static PROFILES_KEY: string = 'profiles';
+
+    private profileSubject: Subject<Profile[]>;
+
+    constructor() {
+        this.profileSubject = new BehaviorSubject<Profile[]>(this.getAll());
+    }
     
     has(id: string): boolean {
         return !!this.getAllProfiles().find(profile => profile.id === id);
@@ -19,6 +26,12 @@ export class LocalstorageProfileRepository implements ProfileRepository {
 
     getAll(): Profile[] {
         return this.getAllProfiles();
+    }
+
+    getAllAsObservable(): Observable<Profile[]> {
+        this.profileSubject.next(this.getAll());
+
+        return this.profileSubject.asObservable(); 
     }
 
     persist(profile: Profile): void {
@@ -75,5 +88,6 @@ export class LocalstorageProfileRepository implements ProfileRepository {
         }
 
         localStorage.setItem(LocalstorageProfileRepository.PROFILES_KEY, JSON.stringify(objectToEncode));
+        this.profileSubject.next(this.getAll());
     }
 }

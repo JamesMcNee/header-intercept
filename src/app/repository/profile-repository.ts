@@ -1,4 +1,5 @@
 import { Profile } from '../domain/profile.model';
+import { Observable } from 'rxjs';
 
 export interface ProfileRepository {
 
@@ -18,6 +19,12 @@ export interface ProfileRepository {
      * Get all stored profiles.
     */
     getAll(): Profile[];
+
+    /**
+     * Get all stored profiles as observable
+     * @returns an observable stream of all the avaliable profiles
+     */
+    getAllAsObservable(): Observable<Profile[]>;
 
     /**
      * Persist a profile, overwriting if a profile with the same ID is found.
