@@ -3,7 +3,6 @@ import { ProfileRepository } from 'src/app/repository/profile-repository';
 import { PROFILE_REPOSITORY } from 'src/app/configuration/injection-tokens';
 import { Observable } from 'rxjs';
 import { Profile } from 'src/app/domain/profile.model';
-import { TestProfileBuilder } from 'src/app/repository/test/test-profile.builder';
 
 @Component({
   selector: 'app-profiles-container',
@@ -17,7 +16,7 @@ export class ProfilesContainerComponent implements OnInit {
   constructor(@Inject(PROFILE_REPOSITORY) private profileRepository: ProfileRepository) { }
 
   ngOnInit() {
-    this.profileRepository.persist({...TestProfileBuilder.anExampleFullProfile()});
+    // this.profileRepository.persist({...TestProfileBuilder.anExampleFullProfile(), id: (Math.random() * 100).toString()});
     this.profiles$ = this.profileRepository.getAllAsObservable();
   }
 

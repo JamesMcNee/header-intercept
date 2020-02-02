@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ProfileRepository } from './profile-repository';
 import { Profile } from '../domain/profile.model';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { ArrayUtils } from '../utils/array.utils';
 
 @Injectable({
     providedIn: "root"
@@ -35,19 +36,13 @@ export class LocalstorageProfileRepository implements ProfileRepository {
     }
 
     persist(profile: Profile): void {
-        const profiles: Profile[] = this.getAllProfiles();
-
-        const transformed: Profile[] = profiles.filter(p => p.id !== profile.id);
-        transformed.push(profile);
-
-        this.persistAllProfiles(transformed);
+        this.persistAll([profile]);
     }
 
     persistAll(profiles: Profile[]): void {
         const storedProfiles: Profile[] = this.getAllProfiles();
 
-        let transformed: Profile[] = storedProfiles.filter(profile => !profiles.map(p => p.id).includes(profile.id));
-        transformed = transformed.concat(profiles);
+        let transformed: Profile[] = ArrayUtils.replaceElementsWhenMatchFoundElseAppend(storedProfiles, profiles, 'id');
 
         this.persistAllProfiles(transformed);
     }

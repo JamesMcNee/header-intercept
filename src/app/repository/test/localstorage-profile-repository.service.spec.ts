@@ -167,6 +167,24 @@ describe('Localstorage Profile Repository', () => {
             expect(actual).toEqual(updatedProfile);
             expect(actual.name).toEqual("NEW_NAME");
         });
+
+        it('should maintain the original position when overwriting an existing profile', () => {
+            // given
+            const firstProfile: Profile = { ...TestProfileBuilder.anExampleProfile(), id: 'PROFILE_ONE', name: "NAME_ONE" };
+            const secondProfile: Profile = { ...TestProfileBuilder.anExampleProfile(), id: 'PROFILE_TWO', name: "NAME_TWO" };
+            const thirdProfile: Profile = { ...TestProfileBuilder.anExampleProfile(), id: 'PROFILE_THREE', name: "NAME_THREE" };
+            populateProfileStore(firstProfile, secondProfile, thirdProfile);
+
+            // when
+            const updatedSecondProfile: Profile = { ...TestProfileBuilder.anExampleProfile(), id: 'PROFILE_TWO', name: "NEW_NAME" };
+            repository.persist(updatedSecondProfile);
+
+            // then
+            const actual: Profile[] = repository.getAll();
+            expect(actual[0]).toEqual(firstProfile);
+            expect(actual[1]).toEqual(updatedSecondProfile);
+            expect(actual[2]).toEqual(thirdProfile);
+        });
     });
 
     describe('persistAll(profiles: Profile[])', () => {
@@ -196,6 +214,25 @@ describe('Localstorage Profile Repository', () => {
 
             // then
             expect(repository.getAll()).toEqual([updatedProfile, newProfile]);
+        });
+
+        it('should maintain the original position of elements when overwriting multiple existing profile', () => {
+            // given
+            const firstProfile: Profile = { ...TestProfileBuilder.anExampleProfile(), id: 'PROFILE_ONE', name: "NAME_ONE" };
+            const secondProfile: Profile = { ...TestProfileBuilder.anExampleProfile(), id: 'PROFILE_TWO', name: "NAME_TWO" };
+            const thirdProfile: Profile = { ...TestProfileBuilder.anExampleProfile(), id: 'PROFILE_THREE', name: "NAME_THREE" };
+            populateProfileStore(firstProfile, secondProfile, thirdProfile);
+
+            // when
+            const updatedFirstProfile: Profile = { ...TestProfileBuilder.anExampleProfile(), id: 'PROFILE_ONE', name: "NEW_NAME_ONE" };
+            const updatedThirdProfile: Profile = { ...TestProfileBuilder.anExampleProfile(), id: 'PROFILE_THREE', name: "NEW_NAME_THREE" };
+            repository.persistAll([updatedFirstProfile, updatedThirdProfile]);
+
+            // then
+            const actual: Profile[] = repository.getAll();
+            expect(actual[0]).toEqual(updatedFirstProfile);
+            expect(actual[1]).toEqual(secondProfile);
+            expect(actual[2]).toEqual(updatedThirdProfile);
         });
     });
 
