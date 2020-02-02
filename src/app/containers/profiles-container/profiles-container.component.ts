@@ -27,5 +27,4 @@ export class ProfilesContainerComponent implements OnInit {
   handleDeleteProfile(id: string): void {
     this.profileRepository.remove(id);
   }
-
 }

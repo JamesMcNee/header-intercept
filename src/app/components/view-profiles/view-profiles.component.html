@@ -5,16 +5,20 @@
     <div class="o-panel__content" *ngIf="getProfileSummary(profile); let summary">
         <div class="content-block">
             <span class="weight_bold">Path matches:</span>
-            <div>There are {{ summary.urlMatches.total }} path matches on this profile. 
-                {{ summary.urlMatches.active }} of these {{ summary.urlMatches.active | isAre }} active, and {{ summary.urlMatches.inactive | isAre: true }} inactive.
+            <div>There are {{ summary.urlMatches.total }} path matches on this profile.
+                {{ summary.urlMatches.active }} of these {{ summary.urlMatches.active | isAre }} active, and
+                {{ summary.urlMatches.inactive | isAre: true }} inactive.
             </div>
         </div>
         <div class="content-block">
-            <span class="weight_bold">Headers ({{summary.headers.active}} active, {{summary.headers.inactive}} inactive):</span>
+            <span class="weight_bold">Headers ({{summary.headers.active}} active, {{summary.headers.inactive}}
+                inactive):</span>
             <div>
                 <ul class="header-list">
                     <li *ngFor="let header of profile.requestHeaders">
-                        <i class="fas" [ngClass]='{"fa-check-circle enabled": header.enabled, "fa-times-circle disabled": !header.enabled}'></i> {{ header.name }}
+                        <i class="fas"
+                            [ngClass]='{"fa-check-circle enabled": header.enabled, "fa-times-circle disabled": !header.enabled}'></i>
+                        {{ header.name }}
                     </li>
                 </ul>
             </div>
@@ -36,4 +40,7 @@
             </li>
         </ul>
     </div>
+</div>
+<div class="add-profile">
+    <a href="#" class="c-button c-button_primary">Add new profile <i class="c-button__icon fas fa-plus"></i></a>
 </div>
