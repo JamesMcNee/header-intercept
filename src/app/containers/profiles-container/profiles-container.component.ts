@@ -11,7 +11,7 @@ import { Profile } from 'src/app/domain/profile.model';
 })
 export class ProfilesContainerComponent implements OnInit {
 
-  protected profiles$: Observable<Profile[]>;
+  profiles$: Observable<Profile[]>;
 
   constructor(@Inject(PROFILE_REPOSITORY) private profileRepository: ProfileRepository) { }
 

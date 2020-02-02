@@ -8,8 +8,8 @@
   },
   "background": {
     "scripts": [
-        "background.js",
-        "runtime.js"
+        "background.bundle.js",
+        "bundle.js"
     ]
   },
   "permissions": [
