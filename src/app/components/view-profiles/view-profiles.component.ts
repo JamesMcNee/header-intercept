@@ -25,7 +25,6 @@ export class ViewProfilesComponent implements OnInit {
   }
 
   deleteProfile(profile: Profile): void {
-    console.log("TEST");
     this.deleteProfileEvent.emit(profile.id);
   }
 
