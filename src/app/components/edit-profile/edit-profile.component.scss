@@ -1,0 +1,32 @@
+.profile-panel {
+    margin: 8px;
+}
+
+.profile-actions {
+    display: inline-flex;
+    list-style-type: none;
+    margin: 0;
+}
+
+.icon-container {
+    font-size: 3vh;
+    margin: 0 10px;
+    cursor: pointer;
+
+    svg {
+        height: 100%;
+    }
+}
+
+.url-filter-row {
+    display: flex;
+    padding: 4px 0;
+
+    * {
+        margin-right: 8px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}

@@ -1,0 +1,52 @@
+<form [formGroup]="profileForm">
+    <div class="o-panel profile-panel">
+        <div class="o-panel__header">
+            <div class="o-panel__title">Profile information</div>
+            <div>Basic details about the profile.</div>
+        </div>
+        <div class="o-panel__content">
+            <div class="c-input-with-icon">
+                <input type="text" placeholder="Profile name" formControlName="name" />
+                <!-- <button type="submit"><i class="fa fa-trash-alt"></i></button> -->
+            </div>
+        </div>
+        <div class="o-panel__footer">
+            <ul class="profile-actions">
+                <li class="icon-container">
+                    <i class="far fa-trash-alt"></i>
+                </li>
+                <li>
+                    <label class="c-switch">
+                        <input type="checkbox" formControlName="enabled">
+                        <span class="c-switch__slider"></span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="o-panel profile-panel">
+        <div class="o-panel__header">
+            <div class="o-panel__title">URL filters</div>
+            <div>Add regex matches on which this profile should be active.</div>
+        </div>
+        <div class="o-panel__content">
+            <div *ngFor="let control of urlFiltersArray.controls" class="url-filter-row">
+                <div class="c-input-with-icon" style="flex: 1;">
+                    <input type="text" placeholder="URL filter regex" [formControl]="control.get('url')" />
+                    <!-- <button type="submit"><i class="fa fa-trash-alt"></i></button> -->
+                </div>
+                <label class="c-switch">
+                    <input type="checkbox" [formControl]="control.get('enabled')">
+                    <span class="c-switch__slider"></span>
+                </label>
+            </div>
+        </div>
+        <div class="o-panel__footer">
+            <ul class="profile-actions">
+                <li class="icon-container" (click)="addUrlFilter()">
+                    <i class="fas fa-plus-circle"></i>
+                </li>
+            </ul>
+        </div>
+    </div>
+</form>

@@ -29,7 +29,7 @@
             <li class="icon-container" (click)="deleteProfile(profile)">
                 <i class="far fa-trash-alt"></i>
             </li>
-            <li class="icon-container">
+            <li class="icon-container" (click)="editProfile(profile)">
                 <i class="fas fa-edit"></i>
             </li>
             <li>
@@ -42,5 +42,5 @@
     </div>
 </div>
 <div class="add-profile">
-    <a href="#" class="c-button c-button_primary">Add new profile <i class="c-button__icon fas fa-plus"></i></a>
+    <a class="c-button c-button_primary" (click)="addProfile()">Add new profile <i class="c-button__icon fas fa-plus"></i></a>
 </div>

@@ -12,9 +12,10 @@ export class ViewProfilesComponent implements OnInit {
   @Input() profiles: Profile[];
   @Output() persistProfileEvent: EventEmitter<Profile> = new EventEmitter<Profile>();
   @Output() deleteProfileEvent: EventEmitter<string> = new EventEmitter<string>();
+  @Output() addProfileEvent: EventEmitter<void> = new EventEmitter<void>();
+  @Output() editProfileEvent: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {
-
   }
 
   ngOnInit() {
@@ -26,6 +27,15 @@ export class ViewProfilesComponent implements OnInit {
 
   deleteProfile(profile: Profile): void {
     this.deleteProfileEvent.emit(profile.id);
+  }
+
+  addProfile(): void {
+    this.addProfileEvent.emit();
+  }
+
+  editProfile(profile: Profile): void {
+    console.log("EDIT");
+    this.editProfileEvent.emit(profile.id);
   }
 
   getProfileSummary(profile: Profile): { urlMatches: { total: number, active: number, inactive: number }, headers: { total: number, active: number, inactive: number }} {

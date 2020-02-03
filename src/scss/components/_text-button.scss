@@ -1,0 +1,39 @@
+@import "../colours";
+
+.c-input-with-icon {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  border-radius: 2px;
+  padding: 10px 15px 12px;
+  background: $background-grey-lightest;
+  border-radius: 30px;
+
+  input {
+    flex-grow: 1;
+    color: #ffffff;
+    vertical-align: middle;
+    border-style: none;
+    background: transparent;
+    outline: none;
+  
+    font-size: 15px;
+  }
+
+  button {
+    color:  #ffffff;
+    vertical-align: middle;
+    transition: color .25s;
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+  
+    font-size: 15px;
+  
+    &:hover {
+        cursor: pointer;
+    }
+  }
+}
