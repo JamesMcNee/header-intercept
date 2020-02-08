@@ -34,7 +34,6 @@ export class ViewProfilesComponent implements OnInit {
   }
 
   editProfile(profile: Profile): void {
-    console.log("EDIT");
     this.editProfileEvent.emit(profile.id);
   }
 

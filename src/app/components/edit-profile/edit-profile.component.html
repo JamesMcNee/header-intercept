@@ -49,4 +49,29 @@
             </ul>
         </div>
     </div>
+    <div class="o-panel profile-panel">
+        <div class="o-panel__header">
+            <div class="o-panel__title">Request Headers</div>
+        </div>
+        <div class="o-panel__content">
+            <table style="width: 100%">
+                <tr *ngFor="let header of profile.requestHeaders">
+                    <td style="width: 42.5%;">{{ header.name }}</td>
+                    <td style="width: 42.5%;">{{ header.value }}</td>
+                    <td style="width: 5%; text-align: center;" (click)="editHeader(header)"><i class="fas fa-edit"></i></td>
+                </tr>
+            </table>
+        </div>
+        <div class="o-panel__footer">
+            <ul class="profile-actions">
+                <li class="icon-container" (click)="editHeader()">
+                    <i class="fas fa-plus-circle"></i>
+                </li>
+            </ul>
+        </div>
+    </div>
 </form>
+<div class="save-profile">
+    <a class="c-button c-button_primary" (click)="persistProfile()">Save profile <i class="c-button__icon fas fa-save"></i></a>
+</div>
+<template #editHeaderTemplate></template>

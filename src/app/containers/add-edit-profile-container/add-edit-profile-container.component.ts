@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Profile } from 'src/app/domain/profile.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -15,7 +15,8 @@ export class AddEditProfileContainerComponent implements OnInit {
 
   activeProfile: Observable<Profile>;
 
-  constructor(private activatedRoute: ActivatedRoute, @Inject(PROFILE_REPOSITORY) private profileRepository: ProfileRepository) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, 
+    @Inject(PROFILE_REPOSITORY) private profileRepository: ProfileRepository) { }
 
   ngOnInit() {
     this.activeProfile = this.activatedRoute.params.pipe(
@@ -30,4 +31,8 @@ export class AddEditProfileContainerComponent implements OnInit {
     );
   }
 
+  persistProfile(profile: Profile): void {
+    this.profileRepository.persist(profile);
+    this.router.navigate(['']);
+  }
 }

@@ -1,0 +1,36 @@
+<div class="o-modal-container">
+    <div class="o-modal">
+        <div class="o-modal__header">
+            <div class="o-modal__title">
+                Add / Edit Request Header
+            </div>
+        </div>
+        <div class="o-modal__content">
+            <form class="header-form" [formGroup]="headerForm">
+                <label for="header-key">
+                    Header key:
+                    <div class="c-input-with-icon">
+                        <input id="header-key" type="text" placeholder="Header key" formControlName="key" />
+                    </div>
+                </label>
+                <label for="header-value">
+                    Header value:
+                    <div class="c-input-with-icon">
+                        <input id="header-value" type="text" placeholder="Header value" formControlName="value" />
+                    </div>
+                </label>
+            </form>
+        </div>
+        <div class="o-modal__footer">
+            <ul class="actions">
+                <li>
+                    <a class="c-button c-button_secondary" (click)="closeModal()">Cancel <i class="c-button__icon fas fa-times"></i></a>
+                </li>
+                <li class="icon-container">
+                    <a class="c-button c-button_primary" (click)="persistHeader()">Save <i class="c-button__icon fas fa-check"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+

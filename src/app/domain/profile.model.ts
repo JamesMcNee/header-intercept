@@ -3,7 +3,7 @@ export interface Profile {
     name: string;
     enabled: boolean;
     urlMatches: URLMatch[];
-    requestHeaders: RequestHeaders[];
+    requestHeaders: RequestHeader[];
 }
 
 interface URLMatch {
@@ -11,7 +11,8 @@ interface URLMatch {
     regex: RegExp | string;
 }
 
-interface RequestHeaders {
+export interface RequestHeader {
+    id: string;
     enabled: boolean;
     name: string;
     value: string;

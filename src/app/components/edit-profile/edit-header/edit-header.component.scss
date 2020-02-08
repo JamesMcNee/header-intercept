@@ -1,0 +1,19 @@
+.actions {
+    display: inline-flex;
+    list-style-type: none;
+    margin: 0;
+
+    li {
+        margin-right: 10px;
+
+        &:last-of-type {
+            margin-right: 0;
+        }
+    }
+}
+
+.header-form {
+    .c-input-with-icon {
+        margin-bottom: 10px;
+    }
+}

@@ -1,6 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Profile } from 'src/app/domain/profile.model';
+import { Component, OnInit, Input, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, ComponentRef, Output, EventEmitter } from '@angular/core';
+import { Profile, RequestHeader } from 'src/app/domain/profile.model';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { EditHeaderComponent } from './edit-header/edit-header.component';
+import { take } from 'rxjs/operators';
+import { Guid } from 'guid-typescript';
+import { ArrayUtils } from 'src/app/utils/array.utils';
 
 @Component({
   selector: 'app-edit-profile',
@@ -9,12 +13,17 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 })
 export class EditProfileComponent implements OnInit {
 
+  @ViewChild("editHeaderTemplate", { read: ViewContainerRef, static: true }) editHeaderTemplate: ViewContainerRef;
+  componentRef: ComponentRef<EditHeaderComponent>;
+
   @Input() profile: Profile;
+
+  @Output() persistProfileEvent: EventEmitter<Profile> = new EventEmitter<Profile>();
 
   profileForm: FormGroup;
   urlFiltersArray: FormArray;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private resolver: ComponentFactoryResolver) { }
 
   ngOnInit() {
     this.urlFiltersArray = this.formBuilder.array(this.profile.urlMatches.map(urlMatch => {
@@ -36,6 +45,26 @@ export class EditProfileComponent implements OnInit {
       'url': '',
       'enabled': false
     }));
+  }
+
+  editHeader(header?: RequestHeader): void {
+    this.editHeaderTemplate.clear(); 
+    const factory: ComponentFactory<EditHeaderComponent> = this.resolver.resolveComponentFactory(EditHeaderComponent);
+    this.componentRef = this.editHeaderTemplate.createComponent(factory);
+    this.componentRef.instance.header = header || { id: Guid.create().toString(), name: '', value: '', enabled: false };
+
+    this.componentRef.instance.dismissEvent.pipe(take(1)).subscribe(() => {
+      this.editHeaderTemplate.clear();
+    });
+
+    this.componentRef.instance.persistHeaderEvent.pipe(take(1)).subscribe((header) => {
+      this.profile.requestHeaders = ArrayUtils.replaceElementWhenMatchFoundElseAppend(header, this.profile.requestHeaders, 'id');
+      this.editHeaderTemplate.clear();
+    });
+  }
+
+  persistProfile(): void {
+    this.persistProfileEvent.emit(this.profile);
   }
 
 }

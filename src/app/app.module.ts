@@ -14,6 +14,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LocalHintsService } from './services/local-hints.service';
 import { AddEditProfileContainerComponent } from './containers/add-edit-profile-container/add-edit-profile-container.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { EditHeaderComponent } from './components/edit-profile/edit-header/edit-header.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     IsArePipe,
     FooterComponent,
     AddEditProfileContainerComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    EditHeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,9 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     { provide: PROFILE_REPOSITORY, useClass: LocalstorageProfileRepository },
     { provide: HINTS_SERVICE, useClass: LocalHintsService }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    EditHeaderComponent
+  ]
 })
 export class AppModule { }
