@@ -56,10 +56,11 @@
         <div class="o-panel__content">
             <table style="width: 100%">
                 <tr *ngFor="let header of profile.requestHeaders">
-                    <td style="width: 5%;  text-align: center; cursor: pointer;" (click)="removeHeader(header)"><i class="fa fa-trash-alt"></i></td>
-                    <td style="width: 45%;">{{ header.name }}</td>
-                    <td style="width: 45%;">{{ header.value }}</td>
-                    <td style="width: 5%; text-align: center; cursor: pointer;" (click)="editHeader(header)"><i class="fas fa-edit"></i></td>
+                    <td style="width: 4%;  text-align: center; cursor: pointer;" (click)="removeHeader(header)"><i class="fa fa-trash-alt"></i></td>
+                    <td style="width: 44%;">{{ header.name }}</td>
+                    <td style="width: 44%;">{{ header.value }}</td>
+                    <td style="width: 4%;"><i class="fas" [ngClass]='{"fa-check-circle enabled": header.enabled, "fa-times-circle disabled": !header.enabled}'></i></td>
+                    <td style="width: 4%; text-align: center; cursor: pointer;" (click)="editHeader(header)"><i class="fas fa-edit"></i></td>
                 </tr>
             </table>
         </div>

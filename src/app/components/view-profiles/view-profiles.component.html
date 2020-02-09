@@ -1,3 +1,7 @@
+<div class="profile-panel" *ngIf="!profiles || profiles.length === 0">
+    Looks like there are no profiles stored! Add a profile to get started...
+</div>
+
 <div class="o-panel profile-panel" *ngFor="let profile of profiles">
     <div class="o-panel__header o-panel__title">
         {{ profile.name }}

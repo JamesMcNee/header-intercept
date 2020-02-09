@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { version } from '../../../manifest.json';
 
 @Component({
   selector: 'app-header',
@@ -13,4 +14,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  public get appVersion(): string {
+    return version;
+  }
 }

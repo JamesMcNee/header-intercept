@@ -9,16 +9,22 @@
             <form class="header-form" [formGroup]="headerForm">
                 <label for="header-key">
                     Header key:
-                    <div class="c-input-with-icon">
+                    <div class="c-input-with-icon" [ngClass]="{'c-input-with-icon_error': hasError('key')}">
                         <input id="header-key" type="text" placeholder="Header key" formControlName="key" />
                     </div>
                 </label>
                 <label for="header-value">
                     Header value:
-                    <div class="c-input-with-icon">
+                    <div class="c-input-with-icon" [ngClass]="{'c-input-with-icon_error': hasError('value')}">
                         <input id="header-value" type="text" placeholder="Header value" formControlName="value" />
                     </div>
                 </label>
+                <div class="right-align">
+                    <label class="c-switch">
+                        <input type="checkbox" formControlName="enabled">
+                        <span class="c-switch__slider"></span>
+                    </label>
+                </div>
             </form>
         </div>
         <div class="o-modal__footer">

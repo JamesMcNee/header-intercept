@@ -36,4 +36,9 @@
         cursor: pointer;
     }
   }
+
+  &_error {
+    box-sizing: border-box;
+    border: 1px solid $negative-red;
+  }
 }

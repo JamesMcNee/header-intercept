@@ -1,6 +1,6 @@
 {
   "name": "Header Intercept",
-  "version": "0.0.1",
+  "version": "0.1.0 - BETA",
   "description": "Add custom headers to requests.",
   "manifest_version": 2,
   "browser_action": {

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Profile, RequestHeader } from 'src/app/domain/profile.model';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   templateUrl: './edit-header.component.html',
@@ -19,23 +19,31 @@ export class EditHeaderComponent implements OnInit {
 
   ngOnInit() {
     this.headerForm = this.formBuilder.group({
-      key: this.header.name || '',
-      value: this.header.value || '',
+      key: new FormControl(this.header.name || '', Validators.required),
+      value: new FormControl(this.header.value || '', Validators.required),
       enabled: this.header.enabled || true
     });
   }
 
   persistHeader(): void {
+    if (!this.headerForm.valid) {
+      return;
+    }
+    
     this.persistHeaderEvent.emit({
       ...this.header,
       name: this.headerForm.get('key').value,
       value: this.headerForm.get('value').value,
-      enabled: this.headerForm.get('value').enabled
+      enabled: this.headerForm.get('enabled').value
     });
   }
 
   closeModal(): void {
     this.dismissEvent.emit();
+  }
+
+  hasError(fieldName: string): boolean {
+    return !this.headerForm.get(fieldName).valid;
   }
 
 }
