@@ -34,4 +34,12 @@
 .save-profile {
     text-align: right;
     margin: 16px 8px;
+
+    a {
+        margin-right: 10px;
+
+        &:last-of-type {
+            margin-right: 0;
+        }
+    }
 }

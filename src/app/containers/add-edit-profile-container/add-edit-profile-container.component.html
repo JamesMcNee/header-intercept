@@ -1,1 +1,2 @@
-<app-edit-profile *ngIf="(activeProfile | async) as profile" [profile]="profile" (persistProfileEvent)="persistProfile($event)"></app-edit-profile>
+<app-edit-profile *ngIf="(activeProfile | async) as profile" [profile]="profile" (persistProfileEvent)="persistProfile($event)" 
+    (cancelEditingEvent)="navigateToHome()"></app-edit-profile>

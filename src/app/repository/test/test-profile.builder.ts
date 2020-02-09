@@ -33,16 +33,19 @@ export abstract class TestProfileBuilder {
             ],
             requestHeaders: [
                 {
+                    id: '1',
                     enabled: true,
                     name: 'enable-super-search',
                     value: 'true'
                 },
                 {
+                    id: '2',
                     enabled: true,
                     name: 'allow-random-results',
                     value: 'false'
                 },
                 {
+                    id: '3',
                     enabled: false,
                     name: 'cause-spontanious-combustion',
                     value: 'true'

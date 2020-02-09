@@ -33,6 +33,10 @@ export class AddEditProfileContainerComponent implements OnInit {
 
   persistProfile(profile: Profile): void {
     this.profileRepository.persist(profile);
+    this.navigateToHome();
+  }
+
+  navigateToHome(): void {
     this.router.navigate(['']);
   }
 }

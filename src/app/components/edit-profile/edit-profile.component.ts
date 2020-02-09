@@ -19,6 +19,7 @@ export class EditProfileComponent implements OnInit {
   @Input() profile: Profile;
 
   @Output() persistProfileEvent: EventEmitter<Profile> = new EventEmitter<Profile>();
+  @Output() cancelEditingEvent: EventEmitter<void> = new EventEmitter<void>();
 
   profileForm: FormGroup;
   urlFiltersArray: FormArray;
@@ -45,6 +46,11 @@ export class EditProfileComponent implements OnInit {
       'url': '',
       'enabled': false
     }));
+    console.log(this.urlFiltersArray.getRawValue());
+  }
+
+  removeUrlFilter(index: number): void {
+    this.urlFiltersArray.removeAt(index);
   }
 
   editHeader(header?: RequestHeader): void {
@@ -63,8 +69,30 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
+  removeHeader(header: RequestHeader): void {
+    this.profile.requestHeaders = this.profile.requestHeaders.filter(rh => rh.id !== header.id);
+  }
+
   persistProfile(): void {
-    this.persistProfileEvent.emit(this.profile);
+    this.persistProfileEvent.emit({
+      ...this.profile,
+      name: this.profileForm.get('name').value,
+      enabled: this.profileForm.get('enabled').value,
+      urlMatches: this.urlFiltersArray.getRawValue().map((urlFilter: {url: string, enabled: boolean}) => {
+        if (!urlFilter || !urlFilter.url) {
+          return undefined;
+        }
+
+        return {
+          regex: urlFilter.url,
+          enabled: urlFilter.enabled
+        }
+      }).filter(el => !!el)
+    });
+  }
+
+  cancelEditing(): void {
+    this.cancelEditingEvent.emit();
   }
 
 }

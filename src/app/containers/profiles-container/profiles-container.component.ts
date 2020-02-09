@@ -4,7 +4,6 @@ import { PROFILE_REPOSITORY } from 'src/app/configuration/injection-tokens';
 import { Observable } from 'rxjs';
 import { Guid } from "guid-typescript";
 import { Profile } from 'src/app/domain/profile.model';
-import { TestProfileBuilder } from 'src/app/repository/test/test-profile.builder';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,7 +18,6 @@ export class ProfilesContainerComponent implements OnInit {
   constructor(@Inject(PROFILE_REPOSITORY) private profileRepository: ProfileRepository, private router: Router) { }
 
   ngOnInit() {
-    this.profileRepository.persist({...TestProfileBuilder.anExampleFullProfile(), id: (Math.random() * 100).toString()});
     this.profiles$ = this.profileRepository.getAllAsObservable();
   }
 
