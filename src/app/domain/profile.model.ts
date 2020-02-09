@@ -8,7 +8,7 @@ export interface Profile {
 
 interface URLMatch {
     enabled: boolean;
-    regex: RegExp | string;
+    regex: string;
 }
 
 export interface RequestHeader {
