@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Profile, RequestHeader } from 'src/app/domain/profile.model';
+import { RequestHeader } from 'src/app/domain/profile.model';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -29,7 +29,7 @@ export class EditHeaderComponent implements OnInit {
     if (!this.headerForm.valid) {
       return;
     }
-    
+
     this.persistHeaderEvent.emit({
       ...this.header,
       name: this.headerForm.get('key').value,

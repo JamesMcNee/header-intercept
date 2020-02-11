@@ -57,13 +57,27 @@ class HeaderApplicationUtils {
 
 const profileStore: ProfileStore = new ProfileStore();
 
-chrome.webRequest.onBeforeSendHeaders.addListener(
-  (currentRequest: any) => {
-    const matchingProfiles = HeaderApplicationUtils.filterProfilesMatchingRequest(currentRequest, profileStore.getProfiles());
-    const newRequestHeaders = HeaderApplicationUtils.createRequestHeaders(currentRequest, matchingProfiles);
+addRequestHeaderListner();
 
-    return { requestHeaders: newRequestHeaders };
-  },
-  { urls: ['<all_urls>'] },
-  ['requestHeaders', 'blocking']
-)
+function addRequestHeaderListner(requestExtraHeaders: boolean = true) {
+  const permissions: string[] = requestExtraHeaders ? ['requestHeaders', 'blocking', 'extraHeaders'] : ['requestHeaders', 'blocking'];
+
+  try {
+    chrome.webRequest.onBeforeSendHeaders.addListener(
+      (currentRequest: any) => {
+        const matchingProfiles = HeaderApplicationUtils.filterProfilesMatchingRequest(currentRequest, profileStore.getProfiles());
+        const newRequestHeaders = HeaderApplicationUtils.createRequestHeaders(currentRequest, matchingProfiles);
+    
+        return { requestHeaders: newRequestHeaders };
+      },
+      { urls: ['<all_urls>'] },
+      permissions
+    )
+  } catch {
+    // If got an error while trying to request extra headers, then make a request without;
+    // this is to get around the fact that Chrome wants 'extraHeaders' to be requested...
+    if (requestExtraHeaders) {
+      addRequestHeaderListner(false);
+    }
+  }
+}
