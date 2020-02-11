@@ -12,7 +12,7 @@ A recent version of Node (https://nodejs.org/en/) e.g. 12.13.1
 A compatible version of NPM (compatible with your version of Node) e.g. 6.13.6
 A compatible version of the angular-cli e.g. 8.3.23
 
-* This application has been created and built using macOS Catalina 1.15.2; however you should be able to run on any compatible OS *
+** This application has been created and built using macOS Catalina 1.15.2; however you should be able to run on any compatible OS **
 
 ## Running / Building the application
 
