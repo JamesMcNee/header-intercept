@@ -1,27 +1,29 @@
 # HeaderIntercept
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
+A browser add-on to allow for the modifying of headers (currently only request headers) that are sent by the browser. The reason someone may wish to do this is to add authentication, content-type or other payloads as headers onto a request; it is especially useful when doing front-end web development.
 
-## Development server
+## Dependencies and Frameworks
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This application has been written using the Angular (8) framework for the UI. There are only a handful of 'extra' dependencies in the application currently, one being a UUID generation libray and RXJS being another.
 
-## Code scaffolding
+## Pre-requisites
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+A recent version of Node (https://nodejs.org/en/) e.g. 12.13.1
+A compatible version of NPM (compatible with your version of Node) e.g. 6.13.6
+A compatible version of the angular-cli e.g. 8.3.23
 
-## Build
+* This application has been created and built using macOS Catalina 1.15.2; however you should be able to run on any compatible OS *
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Running / Building the application
+
+There are two ways to run this application and which one to choose depends on what you are currently working on! If you are simply making UX changes, then you can just run the Angular Development sever (node) and test your changes in a web brower. Simply run `ng serve` or `npm run start` from the root of the project and then navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+The second way, and the way you will need to 'run' the app if you wish to test it as an extension is to run `npm run build` from the root, you will then be able to load the project as an unpackaged add-on in either Chrome or Firefox.
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io). There are a number of unit tests around the repositories/pipers and util functions. Component level tests are not currently in place.
 
-## Running end-to-end tests
+## Contributing
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Feel free to create issues / feature requests against this project, and of course if you have the inclination then submit a PR for review!
