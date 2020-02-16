@@ -16,4 +16,5 @@ export interface RequestHeader {
     enabled: boolean;
     name: string;
     value: string;
+    functionsToApply?: string[];
 } 
