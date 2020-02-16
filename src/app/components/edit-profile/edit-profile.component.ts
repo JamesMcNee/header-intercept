@@ -1,10 +1,11 @@
 import { Component, OnInit, Input, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, ComponentRef, Output, EventEmitter } from '@angular/core';
 import { Profile, RequestHeader } from 'src/app/domain/profile.model';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { EditHeaderComponent } from './edit-header/edit-header.component';
 import { take } from 'rxjs/operators';
 import { Guid } from 'guid-typescript';
 import { ArrayUtils } from 'src/app/utils/array.utils';
+import { ValidateRegex } from 'src/app/utils/regex-form-control-validator';
 
 @Component({
   selector: 'app-edit-profile',
@@ -29,7 +30,7 @@ export class EditProfileComponent implements OnInit {
   ngOnInit() {
     this.urlFiltersArray = this.formBuilder.array(this.profile.urlMatches.map(urlMatch => {
       return this.formBuilder.group({
-        'url': urlMatch.regex,
+        'url': new FormControl(urlMatch.regex, [ValidateRegex]),
         'enabled': urlMatch.enabled
       })
     }));
@@ -43,10 +44,9 @@ export class EditProfileComponent implements OnInit {
 
   addUrlFilter(): void {
     this.urlFiltersArray.push(this.formBuilder.group({
-      'url': '',
+      'url': new FormControl('', [ValidateRegex]),
       'enabled': false
     }));
-    console.log(this.urlFiltersArray.getRawValue());
   }
 
   removeUrlFilter(index: number): void {
@@ -74,6 +74,10 @@ export class EditProfileComponent implements OnInit {
   }
 
   persistProfile(): void {
+    if (!this.profileForm.valid) {
+      return;
+    }
+
     this.persistProfileEvent.emit({
       ...this.profile,
       name: this.profileForm.get('name').value,
@@ -95,4 +99,7 @@ export class EditProfileComponent implements OnInit {
     this.cancelEditingEvent.emit();
   }
 
+  urlFilterHasError(index: number, fieldName: string): boolean {
+    return !this.urlFiltersArray.at(index).get(fieldName).valid;
+  }
 }

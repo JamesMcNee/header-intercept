@@ -30,16 +30,19 @@
             <div>Add regex matches on which this profile should be active.</div>
         </div>
         <div class="o-panel__content">
-            <div *ngFor="let control of urlFiltersArray.controls; let i = index" class="url-filter-row">
-                <div class="c-input-with-icon" style="flex: 1;">
-                    <input type="text" placeholder="URL filter regex" [formControl]="control.get('url')" />
-                    <button type="submit" (click)="removeUrlFilter(i)"><i class="fa fa-trash-alt"></i></button>
+            <ng-container *ngFor="let control of urlFiltersArray.controls; let i = index">
+                <div class="url-filter-row">
+                    <div class="c-input-with-icon" style="flex: 1;" [ngClass]="{'c-input-with-icon_error': urlFilterHasError(i, 'url')}">
+                        <input type="text" placeholder="URL filter regex" [formControl]="control.get('url')" />
+                        <button type="submit" (click)="removeUrlFilter(i)"><i class="fa fa-trash-alt"></i></button>
+                    </div>
+                    <label class="c-switch">
+                        <input type="checkbox" [formControl]="control.get('enabled')">
+                        <span class="c-switch__slider"></span>
+                    </label>
                 </div>
-                <label class="c-switch">
-                    <input type="checkbox" [formControl]="control.get('enabled')">
-                    <span class="c-switch__slider"></span>
-                </label>
-            </div>
+                <span *ngIf="urlFilterHasError(i, 'url')">The value entered is not valid RegEx; please ensure valid regex is supplied.</span>
+            </ng-container>
         </div>
         <div class="o-panel__footer">
             <ul class="profile-actions">
