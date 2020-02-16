@@ -1,4 +1,6 @@
-# HeaderIntercept
+# HeaderIntercept ![Build and Test](https://github.com/JamesMcNee/header-intercept/workflows/Build%20and%20Test/badge.svg?branch=master)
+
+Download plug-in: <a href="https://addons.mozilla.org/en-GB/firefox/addon/header-intercept/"><img src="https://blog.mozilla.org/firefox/files/2017/12/firefox-logo-600x619.png" alt="Firefox Icon" width="30px" height="30px"></a>
 
 A browser add-on to allow for the modifying of headers (currently only request headers) that are sent by the browser. The reason someone may wish to do this is to add authentication, content-type or other payloads as headers onto a request; it is especially useful when doing front-end web development.
 
