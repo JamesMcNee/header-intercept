@@ -26,9 +26,9 @@ class HeaderApplicationUtils {
         let passesRegex: boolean;
 
         try {
-          passesRegex = new RegExp(urlMatch.regex, "g").test(request.documentUrl);
+          passesRegex = [request.url, request.documentUrl, request.originUrl].some(url => new RegExp(urlMatch.regex, "g").test(url));
         } catch (error) {
-          passesRegex = urlMatch.regex === request.documentUrl;
+          passesRegex = urlMatch.regex === request.url || urlMatch.regex === request.documentUrl || urlMatch.regex === request.originUrl;
         }
 
         return urlMatch.enabled && passesRegex;
